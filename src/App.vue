@@ -1,22 +1,40 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Hello Vue 3 + Vite" />
+  <div class="container-fluid">
+    <router-view />
+  </div>
 </template>
-
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-
-// This starter template is using Vue 3 experimental <script setup> SFCs
-// Check out https://github.com/vuejs/rfcs/blob/script-setup-2/active-rfcs/0000-script-setup.md
-</script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<script>
+export default {
+  name: "App",
+  watch: {
+    $route (to, from) {
+      let title = "Upwork"
+      if (typeof to.meta.title == "string")
+        title = `${to.meta.title} - Upwork`
+      else if (typeof to.meta.title == "function")
+        title = `${to.meta.title(to)} - Upwork`
+      document.title = title
+    },
+  },
+  data() {
+    return {
+      top: false
+    }
+  },
+  created () {
+    window.addEventListener('scroll', this.handleScroll);
+  },
+  methods: {
+    scrollTop() {
+      window.scrollTo(0, 0);
+    },
+    handleScroll(event) {
+      if (document.body.scrollTop > 150 || document.documentElement.scrollTop > 150) {
+        this.top = true
+      } else {
+        this.top = false
+      }
+    },
+  }
 }
-</style>
+</script>
