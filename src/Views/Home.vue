@@ -29,9 +29,16 @@ export default {
     }
   },
   methods: {
+    sum(arr) {
+      let sum = 0.0
+      for (let item in arr) {
+        sum += Math.abs(arr[item]['Amount in local currency'])
+      }
+      return sum;
+    },
     readfile(event) {
       let reader = new FileReader();
-      reader.onload = function () {
+      reader.onload =  () => {
         this.data = JSON.parse(csvJSON(reader.result));
         //console.log(this.data);
         console.log(this.data[101]['Ref ID']);
@@ -61,7 +68,8 @@ export default {
         this.withdraw = withdraw;
         this.refund = refund;
 
-        console.log("earning", this.refund);
+        console.log("Test", withdraw)
+        //console.log("earning", this.sum(this.withdraw));
         //console.log(this.data[0]);
       };
 
