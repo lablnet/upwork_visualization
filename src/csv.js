@@ -1,4 +1,4 @@
-function csvJSON(csv){
+export default function csvJSON(csv){
     let lines=csv.split("\n");
     let result = [];
     let headers=lines[0].split(",");
