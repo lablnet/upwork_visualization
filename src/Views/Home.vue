@@ -92,6 +92,10 @@ export default {
 
       //console.log(event.target.files[0]);
       reader.readAsBinaryString(event.target.files[0])
+
+      // reset the input.
+      event.target.value = '';
+
     }
   },
 }
