@@ -1,7 +1,7 @@
 export default function csvJSON(csv){
     let lines=csv.split("\n");
     let result = [];
-    let headers=lines[0].split(",");
+    let headers = lines[0].split(",");
 
     for(let i = 1; i < lines.length; i++) {
         let obj = {};
@@ -12,7 +12,6 @@ export default function csvJSON(csv){
         }
 
         result.push(obj);
-
     }
 
     return JSON.stringify(result);

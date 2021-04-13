@@ -6,6 +6,23 @@
       <input type="file" v-on:change="readfile" className="form-control-file"/>
 
     </div>
+
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <tr>
+          <th>ID</th>
+          <th>Contact</th>
+          <th>Date</th>
+          <th>Amount</th>
+        </tr>
+        <tr v-for="item in data">
+          <td>{{ item['Ref ID'] }}</td>
+          <td>{{item['Description']}}</td>
+          <td>{{ item['Date'] }}</td>
+          <td>{{ item['Amount in local currency'] }}</td>
+        </tr>
+      </table>
+    </div>
   </div>
 </template>
 
