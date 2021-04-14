@@ -9,13 +9,13 @@ const routes = [
             title: "Home"
         }
     },
-    {
+    /* pmn{
         path: "/:catchAll(.*)",
         component: NotFound,
         meta: {
             title: "404 Not Found"
         }
-    },
+    },*/
 ];
 
 export default routes
