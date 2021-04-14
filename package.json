@@ -7,7 +7,9 @@
     "serve": "vite preview"
   },
   "dependencies": {
+    "@j-t-mcc/vue3-chartjs": "^1.0.0",
     "bootstrap": "^4.6.0",
+    "chart.js": "^3.1.0",
     "jquery": "^3.6.0",
     "nprogress": "^0.2.0",
     "popper.js": "^1.16.1",

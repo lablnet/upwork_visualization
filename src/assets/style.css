@@ -1,0 +1,58 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+body {
+    background-color: rgba(229, 231, 235, 1);
+}
+.header {
+    width: 100%;
+    background-color: #fff;
+    padding: 12px;
+    --tw-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+.header .source {
+    float: right;
+    transform: rotate(30deg);
+    margin-top: -15px;
+    padding: 6px;
+    background: #000;
+    color: #fff;
+}
+@media screen and (max-width: 900px) {
+    .header .source {
+        display: none;
+    }
+}
+.main {
+    top: 12px;
+}
+h1::before {
+    content: "\2713";
+    color: black;
+}
+h1 {
+    font-size: 22px!important;
+}
+.h2 {
+    font-size: 18px!important;
+}
+a {
+    font-size: 15px;
+    line-height: 1;
+    color: lightseagreen;
+}
+footer {
+    bottom: 0;
+    background: #fff;
+    width: 100%;
+    padding: 15px;
+    text-align: center;
+}
+footer .note {
+    color: red;
+}
+.fixed {
+    position: fixed;
+}
