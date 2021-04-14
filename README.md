@@ -1,6 +1,8 @@
 # upwork_visualization
 A webapp that is used to visualized Upwork earning and show stats.
 
+**Note: This is an open source project built using Javascript, vuejs and chartjs, no server is involved here, your file is not uploaded to any server. For confirmation you can look to source code.**
+
 ## Features
 1. Show chart of earnings.
 2. Show stats
