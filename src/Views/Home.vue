@@ -13,6 +13,7 @@
         <div class="form-group">
           <label>File</label>
           <input type="file" v-on:change="readfile" class="form-control-file"/>
+          <span class="text-danger" v-if="error">{{ error }}</span>
         </div>
         <h1>How to get transaction history CSV?</h1>
         <a href="https://support.upwork.com/hc/en-us/articles/211068188-Invoices-and-Transactions"> Follow the follwing guide</a>
@@ -96,6 +97,7 @@ export default {
   },
   data() {
     return {
+      error: null,
       labels: [],
       dataset: [],
       loading: false,
@@ -154,8 +156,15 @@ export default {
           serviceFee: [],
           refund: [],
         }
+        let earningsPoints = [
+            'Fixed Price',
+            'Hourly',
+            'Bonus',
+            'Miscellaneous',
+            'Adjustment'
+        ];
         for (let item in this.data) {
-          if (this.data[item]['Type'] === 'Fixed Price' || this.data[item]['Type'] === 'Hourly' || this.data[item]['Type'] === 'Bonus' || this.data[item]['Type'] === 'Miscellaneous' || this.data[item]['Type'] === 'Adjustment') {
+          if (earningsPoints.includes(this.data[item]['Type']) === true) {
             earn.push(this.data[item])
             labels.push(this.data[item]['Date'].replace('"', "").replace('"', ""))
             dataset.earning.push(Math.abs(this.data[item]['Amount']))
@@ -191,9 +200,14 @@ export default {
         this.membership = membership
         this.withdrawFee = withdrawFee
         this.loaded = true
-        console.log("map", this.dataset)
       };
-      reader.readAsBinaryString(event.target.files[0])
+
+      this.error = null
+      if (this.validType.includes(event.target.files[0].type)) {
+        reader.readAsBinaryString(event.target.files[0])
+      } else {
+        this.error = "Please, select valid file type"
+      }
       // reset the input.
       event.target.value = ''
     },

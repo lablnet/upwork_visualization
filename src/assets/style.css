@@ -56,3 +56,9 @@ footer .note {
 .fixed {
     position: fixed;
 }
+
+@media print {
+    header, footer, .noPrint {
+        display: none;
+    }
+}

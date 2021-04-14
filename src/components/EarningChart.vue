@@ -90,7 +90,6 @@ export default {
     }
   },
   mounted() {
-    console.log("Chart mounted", this.labels)
     const ctx = document.getElementById('chart');
     new Chart(ctx, this.ChartData);
 
