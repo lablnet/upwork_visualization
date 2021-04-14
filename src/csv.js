@@ -7,8 +7,10 @@ export default function csvJSON(csv){
         let obj = {};
         let currentline = lines[i].split(",");
 
-        for(let j = 0; j < headers.length; j++){
-            obj[headers[j]] = currentline[j];
+        // fix date, as date contains ",".
+        obj['Date'] = currentline[0] + ', ' + currentline[1] ;
+        for(let j = 2; j < (headers.length); j++){
+            obj[headers[j - 1]] = currentline[j];
         }
 
         result.push(obj);
