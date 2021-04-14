@@ -1,3 +1,8 @@
+
+[![Build and Deploy](https://github.com/lablnet/upwork_visualization/actions/workflows/build.yml/badge.svg)](https://github.com/lablnet/upwork_visualization/actions/workflows/build.yml)
+[Visit](https://lablnet.github.io/upwork_visualization/)
+
+
 # upwork_visualization
 A webapp that is used to visualized Upwork earning and show stats.
 
@@ -33,6 +38,10 @@ npm run dev
 Build
 ```sh
 npm run build
+```
+Serve
+```sh
+npm run serve
 ```
 
 ## Contribution
