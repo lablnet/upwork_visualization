@@ -12,7 +12,11 @@
 
       </div>
       <div class="col-md-4">
-        <b>Total earning: </b> <i>{{ total  }}</i>
+        <b>Total earning: </b> <i>{{ total.sum  }}</i> <br />
+        <b>Total withdraw: </b> <i>{{ total.withdraw  }}</i> <br />
+        <b>Total refund: </b> <i>{{ total.refund  }}</i> <br />
+        <b>Total Upwork Fee: </b> <i>{{ total.fee  }}</i> <br />
+
       </div>
     </div>
     <div class="table-responsive">
@@ -22,6 +26,7 @@
             <th>ID</th>
             <th>Date</th>
             <th>Type</th>
+            <th>Team</th>
             <th>Description</th>
             <th>Amount</th>
           </tr>
@@ -31,9 +36,10 @@
             <td>{{ item['Ref ID'] }}</td>
             <td>{{ item['Date'].replace('"', "") }} </td>
             <td>{{item['Type']}}</td>
+            <td>{{ item['Team'] }}</td>
             <td>{{item['Description']}}</td>
             <td>
-              {{ get_amount(item) }}
+              {{ item['Amount'] }}
             </td>
           </tr>
         </tbody>
@@ -114,49 +120,32 @@ export default {
       event.target.value = '';
 
     },
-    get_amount(item) {
-      let _amount = 0.0
-      console.log("utnes", parseFloat(item['Amount']))
-      if (!isNaN(parseFloat(item['Amount']))) {
-        console.log("!Nah");
-        _amount = item['Amount']
-      } else if (!isNaN(parseFloat(item['Amount in local currency']))) {
-        _amount = item['Amount in local currency']
-      } else if (!isNaN(parseFloat(item['Currency']))) {
-        _amount = item['Currency']
-      }
-      if (_amount === 0) {
-        console.log("item", item)
-      }
-      return _amount
-    },
   },
   computed: {
-    total() {
-      let earning
+    total(x) {
+      console.log("Withdraw", (this.fee))
+      let refund = this.sum(this.refund)
       let sum = 0.0
       for (let item in this.earning) {
-        //console.log("amount", this.earning[item]['Amount'], this.earning[item])
-
-        let amount = 0.0
-        if (!isNaN(parseFloat((this.earning[item]['Amount'])))) {
-          amount = this.earning[item]['Amount']
-        } else if (!isNaN(parseFloat(this.earning[item]['Amount in local currency']))) {
-          amount = this.earning[item]['Amount in local currency']
-        } else if (!isNaN(parseFloat(this.earning[item]['Currency']))) {
-          amount = this.earning[item]['Currency']
-        }
+        let amount = this.earning[item]['Amount']
         if (amount !== 0.0) {
           if (amount > 500) {
-            sum = sum + (amount - (amount * 0.20))
-
+            let temp = amount - 500
+            sum = sum + (500 - (500 * 0.20))
+            sum = sum + (temp - (temp * 0.10))
           } else {
             sum = sum + (amount - (amount * 0.20))
           }
         }
         //console.log("sum", sum)
       }
-      return sum
+      sum = sum - refund
+      return {
+        sum: parseFloat(sum).toFixed(2),
+        refund: parseFloat(refund).toFixed(2),
+        withdraw: parseFloat(this.sum(this.withdraw)).toFixed(2),
+        fee: parseFloat(this.sum(this.serviceFee)).toFixed(2)
+      }
     }
   }
 }
