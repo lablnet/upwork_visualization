@@ -15,8 +15,9 @@ A webapp that is used to visualized Upwork earning and show stats.
 1. Show chart of earnings.
 2. Show stats
 3. Show feeds
-4. Fully Open Source
-5. No server involved
+4. Print
+5. Fully Open Source
+6. No server involved
 
 ## How to run locally?
 Clone this repo.
