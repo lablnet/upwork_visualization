@@ -1,5 +1,5 @@
 <template>
-  <nav class="header">
+  <nav class="header noPrint">
     <div class="text ml-5">
       Upwork Visualization
     </div>
@@ -18,9 +18,12 @@
         <a href="https://support.upwork.com/hc/en-us/articles/211068188-Invoices-and-Transactions"> Follow the follwing guide</a>
       </div>
       <div class="col" v-if="loaded">
-        <h1>Here's is your report.</h1> <br />
+        <a style="float:left" href="javascript:void(0);" @click="clear" class="noPrint">Clear</a>
+        <a style="float:right" href="javascript:window.print()" class="noPrint">print this page</a>
+        <br />
+        <h1>Here's is your report.</h1>
       </div>
-      <div class="row" v-if="loaded">
+      <div class="row mt-4" v-if="loaded">
         <div class="col-md-8">
           <h1 class="h2">Chart:</h1>
           <div style="display: flex;flex-direction:column;" >
@@ -97,7 +100,6 @@ export default {
       dataset: [],
       loading: false,
       loaded: false,
-      file: null,
       data: {},
       earning: [],
       withdraw: [],
@@ -111,6 +113,20 @@ export default {
     }
   },
   methods: {
+    clear() {
+      if (confirm("Are you sure, this action can not be undone")) {
+        this.data = []
+        this.loaded = false
+        this.refund = []
+        this.withdrawFee = []
+        this.serviceFee = []
+        this.dataset = []
+        this.labels = []
+        this.withdraw = []
+        this.membership = []
+        this.earning = []
+      }
+    },
     sum(arr) {
       let sum = 0.0
       for (let item in arr) {
@@ -184,7 +200,7 @@ export default {
   },
   computed: {
     getFooterPosition() {
-      return (this.loaded) ? "" : 'fixed'
+      return (this.loaded) ? "noPrint" : 'fixed'
     },
     total(x) {
       let refund = this.sum(this.refund)

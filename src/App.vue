@@ -8,11 +8,11 @@ export default {
   name: "App",
   watch: {
     $route (to, from) {
-      let title = "Upwork"
+      let title = "Upwork Visualization"
       if (typeof to.meta.title == "string")
-        title = `${to.meta.title} - Upwork`
+        title = `${to.meta.title} - Upwork Visualization`
       else if (typeof to.meta.title == "function")
-        title = `${to.meta.title(to)} - Upwork`
+        title = `${to.meta.title(to)} - Upwork Visualization`
       document.title = title
     },
   },
