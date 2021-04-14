@@ -7,7 +7,15 @@
     "serve": "vite preview"
   },
   "dependencies": {
-    "vue": "^3.0.5"
+    "@j-t-mcc/vue3-chartjs": "^1.0.0",
+    "bootstrap": "^4.6.0",
+    "chart.js": "^3.1.0",
+    "jquery": "^3.6.0",
+    "nprogress": "^0.2.0",
+    "popper.js": "^1.16.1",
+    "vue": "^3.0.5",
+    "vue-chartjs": "^3.5.1",
+    "vue-router": "^4.0.5"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^1.1.5",
