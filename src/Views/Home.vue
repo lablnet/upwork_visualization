@@ -16,7 +16,7 @@
           <span class="text-danger" v-if="error">{{ error }}</span>
         </div>
         <h1>How to get transaction history CSV?</h1>
-        <a href="https://support.upwork.com/hc/en-us/articles/211068188-Invoices-and-Transactions"> Follow the follwing guide</a>
+        <a target="_blank" href="https://support.upwork.com/hc/en-us/articles/211068188-Invoices-and-Transactions"> Follow the follwing guide</a>
       </div>
       <div class="col" v-if="loaded">
         <a style="float:left" href="javascript:void(0);" @click="clear" class="noPrint">Clear</a>
@@ -79,8 +79,8 @@
   </main>
   <footer :class="getFooterPosition">
     <p class="note"><b>Note: This is an open source project built using Javascript, vuejs and chartjs, no server is involved here, your file is not uploaded to any server. For confirmation you can look to source code.</b></p>
-    <p class="copyright">Made with 💕 by <a href="https://www.upwork.com/fl/lablnet">Muhammad Umer Farooq</a>.</p>
-    <a href="https://github.com/lablnet/upwork_visualization">Source Code</a>
+    <p class="copyright">Made with 💕 by <a target="_blank" href="https://www.upwork.com/fl/lablnet">Muhammad Umer Farooq</a>.</p>
+    <a target="_blank" href="https://github.com/lablnet/upwork_visualization">Source Code</a>
   </footer>
 </template>
 
@@ -191,7 +191,7 @@ export default {
           }
         }
 
-        this.labels = labels
+        this.labels = labelsz
         this.dataset = dataset
         this.earning = earn
         this.serviceFee = fee
