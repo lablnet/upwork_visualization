@@ -191,7 +191,7 @@ export default {
           }
         }
 
-        this.labels = labelsz
+        this.labels = labels
         this.dataset = dataset
         this.earning = earn
         this.serviceFee = fee
