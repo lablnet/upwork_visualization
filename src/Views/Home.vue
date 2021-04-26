@@ -109,9 +109,7 @@ export default {
       membership: [],
       withdrawFee: [],
       refund: [],
-      validType: [
-        'application/vnd.ms-excel'
-      ],
+      validType: ['application/vnd.ms-excel', "text/csv"],
     }
   },
   methods: {
