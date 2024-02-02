@@ -88,6 +88,7 @@
 import csvJSON from "../csv.js"
 import Vue3ChartJs from '@j-t-mcc/vue3-chartjs'
 import EarningChart from '../components/EarningChart.vue'
+import Swal from 'sweetalert2'
 
 export default {
   name: "Home",
@@ -114,18 +115,28 @@ export default {
   },
   methods: {
     clear() {
-      if (confirm("Are you sure, this action can not be undone")) {
-        this.data = []
-        this.loaded = false
-        this.refund = []
-        this.withdrawFee = []
-        this.serviceFee = []
-        this.dataset = []
-        this.labels = []
-        this.withdraw = []
-        this.membership = []
-        this.earning = []
-      }
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "This action can not be undone",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, clear it!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.data = []
+          this.loaded = false
+          this.refund = []
+          this.withdrawFee = []
+          this.serviceFee = []
+          this.dataset = []
+          this.labels = []
+          this.withdraw = []
+          this.membership = []
+          this.earning = []
+        }
+      })
     },
     sum(arr) {
       let sum = 0.0
