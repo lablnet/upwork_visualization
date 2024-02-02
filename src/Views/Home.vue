@@ -44,6 +44,7 @@
           <b>Total refund: </b> <i>{{ total.refund  }} USD</i> <br />
           <b>Total Upwork Fee: </b> <i>{{ total.fee  }} USD</i> <br />
           <b>Total Spend on Upwork: </b> <i>{{ total.membership  }} USD</i> <br />
+          <b>Total Payment with Card: </b> <i>{{ total.paymentWithCard  }} USD</i> <br />
         </div>
       </div>
 
@@ -109,6 +110,8 @@ export default {
       serviceFee: [],
       membership: [],
       withdrawFee: [],
+      payments: [],
+      other: [],
       refund: [],
       validType: ['application/vnd.ms-excel', "text/csv"],
     }
@@ -171,8 +174,18 @@ export default {
             'Bonus',
             'Miscellaneous',
             'Adjustment',
-            'Milestone'
+            'Milestone',
+            'Expense'
         ];
+        let colsList = [
+          ...earningsPoints,
+          'Withdrawal',
+          'Service Fee',
+          'Refund',
+          'Membership Fee',
+          'Withdrawal Fee',
+          'Payment'
+        ]
         for (let item in this.data) {
           if (earningsPoints.includes(this.data[item]['Type']) === true) {
             earn.push(this.data[item])
@@ -198,6 +211,13 @@ export default {
           if (this.data[item]['Type'] === 'Withdrawal Fee') {
             withdrawFee.push(this.data[item])
             dataset.withdrawFee.push(Math.abs(this.data[item]['Amount']))
+          } 
+          if (this.data[item]['Type'] === 'Payment') {
+            this.payments.push(this.data[item])
+          } 
+          if (!colsList.includes(this.data[item]['Type'])){
+            this.other.push(this.data[item])
+            console.log ("Other", this.data[item])
           }
         }
 
@@ -227,24 +247,28 @@ export default {
       return (this.loaded) ? "noPrint" : 'fixed'
     },
     total(x) {
-      let earning = parseFloat(this.sum(this.earning)).toFixed(2)
-      let refund  = parseFloat(this.sum(this.refund)).toFixed(2)
-      let withdraw = parseFloat(this.sum(this.withdraw)).toFixed(2)
-      let fee = parseFloat(this.sum(this.serviceFee)).toFixed(2)
-      let membership = parseFloat(this.sum(this.membership)).toFixed(2)
-      let withdrawFee = parseFloat(this.sum(this.withdrawFee)).toFixed(2)
-      let fees = parseFloat(withdraw + fee + membership + withdrawFee + refund).toFixed(2)
-
-      let balance = parseFloat(earning - fees).toFixed(2)
-      console.log ("Balance", balance, "fees", fees, "earning", earning)
+      let earning = parseFloat(this.sum(this.earning))
+      let refund  = parseFloat(this.sum(this.refund))
+      let withdraw = parseFloat(this.sum(this.withdraw))
+      let fee = parseFloat(this.sum(this.serviceFee))
+      let membership = parseFloat(this.sum(this.membership))
+      let withdrawFee = parseFloat(this.sum(this.withdrawFee))
+      let paymentWithCard = parseFloat(this.sum(this.payments))
+      let others = parseFloat(this.sum(this.other))
+      console.log ("Others", others)
+      console.log ("Payment with card", paymentWithCard)
+      let fees = (parseFloat(withdraw + fee + (membership - paymentWithCard) + withdrawFee + refund))    
+      let balance = parseFloat(earning - (fees) ).toFixed(2)
+      console.log ("Balance", balance, "fees", fees, "earning", earning, (parseFloat(withdraw) + parseFloat(fee)), "t", fee)
       return {
         balance: balance,
-        earning: earning,
-        refund: refund,
-        withdraw: withdraw,
-        fee: fee,
-        membership: membership,
-        withdrawFee: withdrawFee,
+        earning: earning.toFixed(2),
+        refund: refund.toFixed(2),
+        withdraw: withdraw.toFixed(2),
+        fee: fee.toFixed(2),
+        membership: membership.toFixed(2),
+        withdrawFee: withdrawFee.toFixed(2),
+        paymentWithCard: paymentWithCard.toFixed(2),
       }
     }
   }
