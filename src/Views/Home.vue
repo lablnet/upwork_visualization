@@ -232,7 +232,10 @@ export default {
       let fee = parseFloat(this.sum(this.serviceFee)).toFixed(2)
       let membership = parseFloat(this.sum(this.membership)).toFixed(2)
       let withdrawFee = parseFloat(this.sum(this.withdrawFee)).toFixed(2)
-      let balance = parseFloat(earning - (withdraw + fee + membership + withdrawFee + refund)).toFixed(2)
+      let fees = parseFloat(withdraw + fee + membership + withdrawFee + refund).toFixed(2)
+
+      let balance = parseFloat(earning - fees).toFixed(2)
+      console.log ("Balance", balance, "fees", fees, "earning", earning)
       return {
         balance: balance,
         earning: earning,
