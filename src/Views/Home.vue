@@ -170,7 +170,8 @@ export default {
             'Hourly',
             'Bonus',
             'Miscellaneous',
-            'Adjustment'
+            'Adjustment',
+            'Milestone'
         ];
         for (let item in this.data) {
           if (earningsPoints.includes(this.data[item]['Type']) === true) {
