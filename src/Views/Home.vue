@@ -37,8 +37,8 @@
         </div>
         <div class="col-md-4">
           <h1 class="h2">Stats:</h1>
-
-          <b>Total earning: </b> <i>{{ total.sum  }} USD</i> <br />
+          <b>Balance: </b> <i>{{ total.balance  }} USD</i> <br />
+          <b>Total earning: </b> <i>{{ total.earning  }} USD</i> <br />
           <b>Total withdraw: </b> <i>{{ total.withdraw  }} USD</i> <br />
           <b>Total Withdraw Fee: </b> <i>{{ total.withdrawFee  }} USD</i> <br />
           <b>Total refund: </b> <i>{{ total.refund  }} USD</i> <br />
@@ -226,28 +226,21 @@ export default {
       return (this.loaded) ? "noPrint" : 'fixed'
     },
     total(x) {
-      let refund = this.sum(this.refund)
-      let sum = 0.0
-      for (let item in this.earning) {
-        let amount = this.earning[item]['Amount']
-        if (amount !== 0.0) {
-          if (amount > 500) {
-            let temp = amount - 500
-            sum = sum + (500 - (500 * 0.20))
-            sum = sum + (temp - (temp * 0.10))
-          } else {
-            sum = sum + (amount - (amount * 0.20))
-          }
-        }
-      }
-      sum = sum - refund
+      let earning = parseFloat(this.sum(this.earning)).toFixed(2)
+      let refund  = parseFloat(this.sum(this.refund)).toFixed(2)
+      let withdraw = parseFloat(this.sum(this.withdraw)).toFixed(2)
+      let fee = parseFloat(this.sum(this.serviceFee)).toFixed(2)
+      let membership = parseFloat(this.sum(this.membership)).toFixed(2)
+      let withdrawFee = parseFloat(this.sum(this.withdrawFee)).toFixed(2)
+      let balance = parseFloat(earning - (withdraw + fee + membership + withdrawFee + refund)).toFixed(2)
       return {
-        sum: parseFloat(sum).toFixed(2),
-        refund: parseFloat(refund).toFixed(2),
-        withdraw: parseFloat(this.sum(this.withdraw)).toFixed(2),
-        fee: parseFloat(this.sum(this.serviceFee)).toFixed(2),
-        membership: parseFloat(this.sum(this.membership)).toFixed(2),
-        withdrawFee: parseFloat(this.sum(this.withdrawFee)).toFixed(2),
+        balance: balance,
+        earning: earning,
+        refund: refund,
+        withdraw: withdraw,
+        fee: fee,
+        membership: membership,
+        withdrawFee: withdrawFee,
       }
     }
   }
